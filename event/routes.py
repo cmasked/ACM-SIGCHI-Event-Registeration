@@ -21,10 +21,15 @@ def register_page():
         with open(JSON_FILE, 'r') as f:
             registrations = json.load(f)
 
+        # Check for duplicate email
+        if any(r['email'].lower() == form.email.data.lower() for r in registrations):
+            flash('This email has already been registered.', 'danger')
+            return render_template('register.html', form=form)
+
         # Append new registration
         registrations.append({
-            'name': form.name.data,
-            'email': form.email.data
+            'name': form.name.data.strip(),
+            'email': form.email.data.strip()
         })
 
         # Write back to JSON
