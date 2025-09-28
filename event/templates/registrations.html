@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ACM SIGCHI Registrations</title>
+    <style>
+        * { box-sizing:border-box; margin:0; padding:0; }
+        body { font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background:#0d1b2a; color:#e0e0e0; min-height:100vh; display:flex; justify-content:center; align-items:flex-start; padding-top:50px; }
+        .wrapper { display:flex; flex-direction:column; align-items:center; }
+        header { text-align:center; margin-bottom:40px; }
+        header h1 { color:#a0c4ff; font-size:2rem; letter-spacing:1px; }
+        .container { background:#1b263b; padding:40px; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.4); width:500px; }
+        h2 { text-align:center; margin-bottom:25px; color:#ffffff; }
+        table { width:100%; border-collapse:collapse; }
+        th, td { padding:10px; border-bottom:1px solid #415a77; text-align:left; }
+        th { color:#a0c4ff; }
+        td { color:#e0e0e0; }
+        a.button { display:inline-block; margin-top:20px; padding:10px 20px; background:#415a77; color:#f0f0f0; text-decoration:none; border-radius:6px; transition: background 0.3s ease; }
+        a.button:hover { background:#1b4068; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>ACM SIGCHI</h1>
+        </header>
+
+        <div class="container">
+            <h2>Registered Participants</h2>
+            {% if registrations %}
+                <table>
+                    <tr><th>Name</th><th>Email</th></tr>
+                    {% for r in registrations %}
+                        <tr>
+                            <td>{{ r.name }}</td>
+                            <td>{{ r.email }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% else %}
+                <p>No registrations yet.</p>
+            {% endif %}
+
+            <a href="{{ url_for('register_page') }}" class="button">Register Another</a>
+        </div>
+    </div>
+</body>
+</html>

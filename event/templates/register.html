@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ACM SIGCHI Event Registration</title>
+    <style>
+        * { box-sizing: border-box; margin:0; padding:0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0d1b2a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 50px;
+        }
+        .wrapper { display:flex; flex-direction: column; align-items:center; }
+        header { text-align:center; margin-bottom:40px; }
+        header h1 { color:#a0c4ff; font-size:2rem; letter-spacing:1px; }
+        .container { background:#1b263b; padding:40px; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.4); width:400px; }
+        h2 { text-align:center; margin-bottom:25px; color:#ffffff; }
+        form input[type="text"], form input[type="email"], form input[type="submit"] {
+            width:100%; padding:12px 15px; margin-bottom:15px; border:1px solid #415a77; border-radius:6px; font-size:16px;
+            background:#0d1b2a; color:#e0e0e0;
+        }
+        form input[type="submit"] { background:#415a77; color:#f0f0f0; font-weight:bold; border:none; cursor:pointer; transition:background 0.3s ease; }
+        form input[type="submit"]:hover { background:#1b4068; }
+        .msg { text-align:center; margin-bottom:15px; font-weight:bold; }
+        .success { color:#00ffb3; }
+        .danger { color:#ff6b6b; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <h1>ACM SIGCHI</h1>
+        </header>
+
+        <div class="container">
+            <h2>Event Registration</h2>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, msg in messages %}
+                        <p class="msg {{ category }}">{{ msg }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                {{ form.name.label }}<br>
+                {{ form.name(size=35) }}<br>
+                {{ form.email.label }}<br>
+                {{ form.email(size=35) }}<br>
+                {{ form.submit() }}
+            </form>
+        </div>
+    </div>
+</body>
+</html>
